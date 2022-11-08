@@ -8,7 +8,7 @@ interface Relation : Iterable<Block> {
     val columns: ColumnDefinition
 
     /**
-     * an estimation of the relations' tuple count
+     * an estimation of the number of blocks used by the relation
      */
     val estimatedSize: Int
 
