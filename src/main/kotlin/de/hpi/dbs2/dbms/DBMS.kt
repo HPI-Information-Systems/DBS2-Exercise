@@ -238,6 +238,6 @@ class DBMS(
 
         override fun iterator(): Iterator<Block> = blocks.iterator()
 
-        override val estimatedSize: Int get() = blocks.size * blockCapacity
+        override val estimatedSize: Int get() = blocks.size
     }
 }
