@@ -1,15 +1,11 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.gradle.configurationcache.extensions.capitalized
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
-import org.gradle.jvm.tasks.Jar
 
 plugins {
     kotlin("jvm") version "1.7.20"
     id("java")
-    application
 
     id("com.github.ben-manes.versions") version "0.42.0"
-    id("com.github.johnrengelman.shadow") version "7.1.2"
     idea
 }
 
@@ -39,11 +35,6 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-core:5.5.1")
 }
 
-application {
-    applicationName = "dbs2exercises"
-    mainClass.set("$group.exerciseframework.MainKt")
-}
-
 kotlin {
     jvmToolchain(17)
 }
@@ -66,20 +57,9 @@ tasks {
             freeCompilerArgs = listOf("-Xcontext-receivers")
         }
     }
-    withType<Jar> {
-        manifest {
-            attributes(
-                "Main-Class" to application.mainClass
-            )
-        }
-    }
-    withType<ShadowJar> {
-        archiveFileName.set("dbs2exercises.jar")
-    }
     listOf(
         "exercise0",
         "exercise1",
-        "exercise2",
     ).forEach { exerciseDescriptor ->
         register<Zip>("pack${exerciseDescriptor.capitalized()}") {
             archiveFileName.set("group$groupIdentifier-$exerciseDescriptor.zip")
