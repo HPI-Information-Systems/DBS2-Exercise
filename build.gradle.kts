@@ -6,6 +6,7 @@ plugins {
     id("java")
 
     id("com.github.ben-manes.versions") version "0.42.0"
+    id("org.jetbrains.dokka") version "1.7.20"
     idea
 }
 
@@ -24,6 +25,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
+    dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.7.20")
 
     implementation("com.github.ajalt.clikt:clikt:3.5.0")
 
@@ -32,7 +34,7 @@ dependencies {
 
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.1")
-    testImplementation("io.kotest:kotest-assertions-core:5.5.1")
+    testImplementation("io.kotest:kotest-assertions-core:5.5.3")
 }
 
 kotlin {
