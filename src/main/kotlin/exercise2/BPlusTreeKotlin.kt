@@ -1,29 +1,17 @@
-package exercise2;
+package exercise2
 
-import de.hpi.dbs2.ChosenImplementation;
-import de.hpi.dbs2.exercise2.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import de.hpi.dbs2.ChosenImplementation
+import de.hpi.dbs2.exercise2.AbstractBPlusTree
+import de.hpi.dbs2.exercise2.BPlusTreeNode
+import de.hpi.dbs2.exercise2.ValueReference
 
-/**
- * This is the B+-Tree implementation you will work on.
- * Your task is to implement the insert-operation.
- *
- */
 @ChosenImplementation(false)
-public class BPlusTreeJava extends AbstractBPlusTree {
-    public BPlusTreeJava(int order) {
-        super(order);
-    }
+class BPlusTreeKotlin : AbstractBPlusTree {
+    constructor(order: Int) : super(order)
+    constructor(rootNode: BPlusTreeNode<*>) : super(rootNode)
 
-    public BPlusTreeJava(BPlusTreeNode<?> rootNode) {
-        super(rootNode);
-    }
-
-    @Nullable
-    @Override
-    public ValueReference insert(@NotNull Integer key, @NotNull ValueReference value) {
-        throw new UnsupportedOperationException("~~~ your implementation here ~~~");
+    override fun insert(key: Int, value: ValueReference): ValueReference? {
+        TODO("~~~ your implementation here ~~~")
 
         // Find LeafNode in which the key has to be inserted.
         //   It is a good idea to track the "path" to the LeafNode in a Stack or something alike.

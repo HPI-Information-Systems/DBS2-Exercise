@@ -1,8 +1,5 @@
 package de.hpi.dbs2.exercise2;
 
-import de.hpi.dbs2.exercise2.*;
-import exercise2.BPlusTreeJava;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,5 +60,5 @@ public class TestFixtures {
     static {
         ((InnerNode) exampleRoot).fixLeafLinks();
     }
-    public final static BPlusTreeJava exampleTree = new BPlusTreeJava(exampleRoot);
+    public final static AbstractBPlusTree exampleTree = new ReadOnlyBPlusTree(exampleRoot);
 }

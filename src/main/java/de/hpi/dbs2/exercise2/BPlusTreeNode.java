@@ -101,9 +101,9 @@ public sealed abstract class BPlusTreeNode<V> permits InnerNode, LeafNode {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringifyTree(stringBuilder, 0, false);
-        return stringBuilder.toString();
+        StringBuilder builder = new StringBuilder();
+        stringifyTree(builder, 0, false);
+        return builder.toString();
     }
 
     protected abstract void stringifyTree(StringBuilder builder, int depth, boolean hideEmptyReferences);

@@ -1,26 +1,25 @@
 package de.hpi.dbs2.exercise2;
 
-import exercise2.BPlusTreeJava;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class BPlusTreeTests {
+public class ReadOnlyBPlusTreeTests {
     @Test
     public void testTreesAreValid() {
         Assertions.assertTrue(TestFixtures.exampleTree.isValid());
 
-        BPlusTreeJava emptyTree1 = new BPlusTreeJava(4);
+        AbstractBPlusTree emptyTree1 = new ReadOnlyBPlusTree(4);
         Assertions.assertTrue(emptyTree1.isValid());
 
-        BPlusTreeJava emptyTree2 = new BPlusTreeJava(new InitialRootNode(4));
+        AbstractBPlusTree emptyTree2 = new ReadOnlyBPlusTree(new InitialRootNode(4));
         Assertions.assertTrue(emptyTree2.isValid());
 
-        BPlusTreeJava singleEntryTree = new BPlusTreeJava(
+        AbstractBPlusTree singleEntryTree = new ReadOnlyBPlusTree(
             new InitialRootNode(4, TestFixtures.getOrCreateEntry(0))
         );
         Assertions.assertTrue(singleEntryTree.isValid());
 
-        BPlusTreeJava dualEntryTree = new BPlusTreeJava(
+        AbstractBPlusTree dualEntryTree = new ReadOnlyBPlusTree(
             new InitialRootNode(4, TestFixtures.getOrCreateEntry(0))
         );
         Assertions.assertTrue(dualEntryTree.isValid());

@@ -43,7 +43,12 @@ public class Ex2Main {
         );
         System.out.println(root);
 
-        BPlusTreeJava tree = new BPlusTreeJava(root);
+        AbstractBPlusTree tree = new BPlusTreeJava(root);
         System.out.println(tree);
+
+        /*
+         * playground
+         * ~ feel free to experiment with the tree and tree nodes here
+         */
     }
 }
