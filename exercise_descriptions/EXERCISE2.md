@@ -1,4 +1,4 @@
-# Exercise 0
+# Exercise 2
 
 You will find the relevant files at:
  - for Java: `./src/main/java/exercise2/`
