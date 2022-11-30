@@ -23,8 +23,11 @@ Relevant files / classes:
 
 ## Notes
 
-- It might help to write tests for certain states of the nodes to validate 
-  that your algorithm does what you want it to do.
-  Check out our existing tests, to get an idea on how to write tests.
-- Testing your algorithm by drawing it on paper is also helpful - also "rubber ducking"!
-- If you get stuck or are unsure how to tackle an upcoming problem, do message us in Moodle!
+- Get familiar with the Interfaces of all Tree Components.
+- While developing, print the tree regularly to understand the changes you made.
+- It might help to write tests for certain states of the nodes to validate that your algorithm does what you want it to do. Check out our existing tests, to get an idea on how to write tests.
+- Do not optimize early. For example, be okay with copying elements multiple times if that makes your implementation easier.
+- Take advantage of helper methods, such as `isFull()` or `getNodeSize()`.
+- Keep in mind to replace the `InitialRootNode` as soon as the tree has multiple levels.
+  - Every root after the initial root is a standard `InnerNode`, but checks the special constraints of a root separately.
+- The pointer between consecutive `LeafNode`s are instance variables instead of `ValueReference`s in the `references` array.
