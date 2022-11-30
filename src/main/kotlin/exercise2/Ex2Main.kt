@@ -40,6 +40,11 @@ fun main() {
     val tree: AbstractBPlusTree = BPlusTreeKotlin(root)
     println(tree)
 
+    val leafNode = LeafNode(4)
+    println(leafNode)
+    val innerNode = InnerNode(4)
+    println(innerNode)
+
     /*
      * playground
      * ~ feel free to experiment with the tree and tree nodes here
