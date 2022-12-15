@@ -14,9 +14,9 @@ import java.util.List;
 public class Ex3Main {
 
 	public static void main(String[] args) {
-		File inputRelation1File = new File(".\\src\\test\\resources\\exercise3\\title.basics.sample.tsv");
+		File inputRelation1File = new File("./src/test/resources/exercise3/title.basics.sample.tsv");
 		System.out.println("Using \"" + inputRelation1File + "\" as input relation 1.");
-		File inputRelation2File = new File(".\\src\\test\\resources\\exercise3\\title.principals.sample.tsv");
+		File inputRelation2File = new File("./src/test/resources/exercise3/title.principals.sample.tsv");
 		System.out.println("Using \"" + inputRelation2File + "\" as input relation 2.");
 
 		DBMS dbms = new DBMS(5, 10);

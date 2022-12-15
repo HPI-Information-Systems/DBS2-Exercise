@@ -27,7 +27,7 @@ fun main() {
             blockCapacity = 10
         )
     ) {
-        val leftInputRelation = File(".\\src\\test\\resources\\exercise3\\title.basics.sample.tsv")
+        val leftInputRelation = File("./src/test/resources/exercise3/title.basics.sample.tsv")
             .also { println("Using \"$it\" as input relation 1") }.inputStream()
             .use {
                 createRelation(blockManager, leftColumnDefinition)
@@ -41,7 +41,7 @@ fun main() {
                         )
                     }
             }
-        val rightInputRelation = File(".\\src\\test\\resources\\exercise3\\title.principals.sample.tsv")
+        val rightInputRelation = File("./src/test/resources/exercise3/title.principals.sample.tsv")
             .also { println("Using \"$it\" as input relation 2") }.inputStream()
             .use {
                 createRelation(blockManager, rightColumnDefinition)
