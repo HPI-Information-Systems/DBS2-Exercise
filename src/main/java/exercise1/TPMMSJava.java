@@ -20,7 +20,21 @@ public class TPMMSJava extends SortOperation {
 
     @Override
     public int estimatedIOCost(@NotNull Relation relation) {
-        throw new UnsupportedOperationException("TODO");
+        Iterator<Block> blocks = relation.iterator();
+        int blockCount = 0;
+        while (blocks.hasNext()) {
+            blocks.next();
+            blockCount++;
+        }
+        return blockCount * 3;
+    }
+
+    public Block getBlock( List<List<Block>> pre_sorted_blocks,  List<Integer> BlockPointer, int i){
+        return pre_sorted_blocks.get(i).get(BlockPointer.get(i));
+    }
+
+    public Tuple getHead( List<List<Block>> pre_sorted_blocks, List<Integer> TuplePointer, List<Integer> BlockPointer, int i){
+        return pre_sorted_blocks.get(i).get(BlockPointer.get(i)).get(TuplePointer.get(i));
     }
 
     public List<List<Block>> phase1(Relation relation, BlockManager manager, Iterator<Block> blocks, Comparator<Tuple> comparator, int memoryBlocks) {
@@ -37,23 +51,13 @@ public class TPMMSJava extends SortOperation {
             for (Block block : loadedBlocks) {
                 sortBlock.add(block);
             }
-            sortedBlocks.add(sortBlock);
 
-            for (Block block : loadedBlocks) {
-                manager.release(block, true);
-            }
+            loadedBlocks.replaceAll(block -> manager.release(block, true));
+            sortedBlocks.add(sortBlock);
             loadedBlocks.clear();
         }
         System.out.println("Phase 1 finished");
         return sortedBlocks;
-    }
-
-    public Tuple getHead( List<List<Block>> pre_sorted_blocks, List<Integer> TuplePointer, List<Integer> BlockPointer, int i){
-        return pre_sorted_blocks.get(i).get(BlockPointer.get(i)).get(TuplePointer.get(i));
-    }
-
-    public Block getBlock( List<List<Block>> pre_sorted_blocks,  List<Integer> BlockPointer, int i){
-        return pre_sorted_blocks.get(i).get(BlockPointer.get(i));
     }
 
 
@@ -91,10 +95,7 @@ public class TPMMSJava extends SortOperation {
                 }
 
                 Tuple head = block.get(TuplePointer.get(i));
-                if(finished.contains(minList)){
-                    minList = i;
-                }
-                else if (comparator.compare(head, getHead(pre_sorted_blocks, TuplePointer, BlockPointer, minList)) < 0) {
+                if (finished.contains(minList) || comparator.compare(head, getHead(pre_sorted_blocks, TuplePointer, BlockPointer, minList)) < 0) {
                     minList = i;
                 }
             }
@@ -114,7 +115,6 @@ public class TPMMSJava extends SortOperation {
 
             if (outputBlock.isFull()) {
                 output.output(outputBlock);
-                outputBlock.clear();
             }
     }
         System.out.println("Phase 2 finished");
@@ -124,17 +124,19 @@ public class TPMMSJava extends SortOperation {
     public void sort(@NotNull Relation relation, @NotNull BlockOutput output) {
         BlockManager manager = super.getBlockManager();
         Iterator<Block> blocks = relation.iterator();
-        int columnIndex = super.getSortColumnIndex();
-        Comparator<Tuple> comparator = relation.getColumns().getColumnComparator(columnIndex);
+        Comparator<Tuple> comparator = relation.getColumns().getColumnComparator(super.getSortColumnIndex());
 
         int memoryBlocks = manager.getFreeBlocks();
         int relationSize = relation.getEstimatedSize();
 
-        if (relationSize > memoryBlocks * memoryBlocks) {
+        if (relationSize > memoryBlocks * memoryBlocks -1) {
             throw new RelationSizeExceedsCapacityException();
         }
 
         List<List<Block>> pre_sorted_blocks = phase1(relation, manager, blocks, comparator, memoryBlocks);
+        if (pre_sorted_blocks.isEmpty()) {
+            return;
+        }
         phase2(manager, pre_sorted_blocks, output, comparator);
     }
 }

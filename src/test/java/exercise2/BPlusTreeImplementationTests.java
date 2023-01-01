@@ -23,9 +23,9 @@ public class BPlusTreeImplementationTests {
     public void testTreeInsertRandomSet() {
         AbstractBPlusTree tree = getImplementation(4);
 
-        Random random = new Random(1);
+        Random random = new Random(2847623);
 
-        int entryCount = 15;
+        int entryCount = 28473;
         List<Integer> keys = new ArrayList<>(
             IntStream.range(0, entryCount).boxed().toList()
         );
