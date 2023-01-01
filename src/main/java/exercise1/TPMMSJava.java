@@ -4,6 +4,8 @@ import de.hpi.dbs2.ChosenImplementation;
 import de.hpi.dbs2.dbms.*;
 
 import de.hpi.dbs2.dbms.utils.BlockSorter;
+import de.hpi.dbs2.dbms.BlockManager;
+import de.hpi.dbs2.dbms.Relation;
 import de.hpi.dbs2.exercise1.SortOperation;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,7 +16,10 @@ import java.util.List;
 
 @ChosenImplementation(true)
 public class TPMMSJava extends SortOperation {
-    public TPMMSJava(@NotNull BlockManager manager, int sortColumnIndex) {
+    public TPMMSJava(
+        @NotNull BlockManager manager,
+        int sortColumnIndex
+    ) {
         super(manager, sortColumnIndex);
     }
 
@@ -36,7 +41,6 @@ public class TPMMSJava extends SortOperation {
     public Tuple getHead( List<List<Block>> pre_sorted_blocks, List<Integer> TuplePointer, List<Integer> BlockPointer, int i){
         return pre_sorted_blocks.get(i).get(BlockPointer.get(i)).get(TuplePointer.get(i));
     }
-
     public List<List<Block>> phase1(Relation relation, BlockManager manager, Iterator<Block> blocks, Comparator<Tuple> comparator, int memoryBlocks) {
 
         List<List<Block>> sortedBlocks = new ArrayList<>();
